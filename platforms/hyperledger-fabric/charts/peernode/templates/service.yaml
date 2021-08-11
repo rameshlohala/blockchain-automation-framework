@@ -8,7 +8,7 @@ metadata:
   # This can be fixed only when https://jira.hyperledger.org/browse/FAB-8131 issue is fixed
   # After the issue is fixed, changes similar to the commented code has to be done by using correct secrets.
   # Otherwise as ambassador is not able to passthrough TLS connection, grpc over ambassador is not going to work
-  # hence we have used a HAProxy ingress whoich does ssl-passthrough.  
+  # hence we have used a HAProxy ingress whoich does ssl-passthrough.
   annotations:
     {{- if $.Values.annotations }}
     {{- range $key, $value := $.Values.annotations.service }}
@@ -16,8 +16,8 @@ metadata:
       {{ $k }}: {{ $v | quote }}
     {{- end }}
     {{- end }}
-    {{- end }} 
-    {{- if eq $.Values.proxy.provider "ambassador" }} 
+    {{- end }}
+    {{- if eq $.Values.proxy.provider "ambassador" }}
     getambassador.io/config: |
       ---
       apiVersion: ambassador/v2
@@ -50,7 +50,7 @@ metadata:
       prefix: /
       rewrite: /
       service: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}:{{ $.Values.service.ports.grpc.clusteripport }}
-  {{- end }} # end if Values.proxy  
+  {{- end }} # end if Values.proxy
   {{- if and $.Values.service.loadBalancerType (eq $.Values.service.loadBalancerType "Internal") }}
     cloud.google.com/load-balancer-type: "Internal"
   {{- end }}
@@ -104,7 +104,7 @@ metadata:
   namespace:  {{ $.Values.metadata.namespace }}
   annotations:
     kubernetes.io/ingress.class: "haproxy"
-    ingress.kubernetes.io/ssl-passthrough: "true"  
+    ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   rules:
   - host: {{ $.Values.peer.name }}.{{ $.Values.metadata.namespace }}.{{ $.Values.proxy.external_url_suffix }}
