@@ -11,7 +11,7 @@
     kubeconfig: "{{ kubernetes.config_file }}"
     context: "{{ kubernetes.context }}"
   register: result
-  when: (component_type == "Namespace" and type == "no_retry") or ( component_type == "StorageClass" and type == "no_retry" ) or (component_type == "ClusterRoleBinding" and type == "no_retry")
+  # when: (component_type == "Namespace" and type == "no_retry") or ( component_type == "StorageClass" and type == "no_retry" ) or (component_type == "ClusterRoleBinding" and type == "no_retry")
 
 # Check if a component is created with retry
 - name: Wait for {{ component_type }} {{ component_name }}
